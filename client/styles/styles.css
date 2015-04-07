@@ -24,14 +24,11 @@ body {
 /*    MAIN CONTENT    */
 /*********************/
 
-.main {
+#main {
     margin-top: 80px;
 }
 .main-col {
-    border: 1px solid #979797;
-    border-radius: 5px;
     min-height: 600px;
-    background: white;
     font-family: "Helvetica Neue", Helvetica, arial, sans-serif;
     padding: 0 0 25px 0;
     margin-bottom: 100px;
@@ -58,25 +55,35 @@ body {
 /*   NEW POST FORM    */
 /*********************/
 
-form {
-    padding: 20px;
-    padding-left: 0;
-    margin-bottom: 20px;
-}
 form input[type=text] {
     margin-right: 10px;
     width: 70%;
     font-size: 12px;
     padding: 5px;
 }
+.new-post-con {
+    border-radius: 5px;
+    border: 1px solid #979797;
+    background: #F2F2F2;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+.new-post-con h1 {
+    margin: 0;
+    font-size: 1.2em;
+    float: left;
+    margin-bottom: 15px;
+}
+
+.new-post-con h4 {
+    float: right;
+    font-size: 0.9em;
+    color: #808080;
+    margin-top: 2px;
+}
 
 .new-post {
-    padding: 20px;
-    background: #F2F2F2;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-    border-bottom: 1px solid #979797;
-    overflow: auto;
+    /*overflow: auto;*/
 }
 .new-post textarea, .new-post textarea:focus {
     resize: none;
@@ -94,29 +101,76 @@ form input[type=text] {
     margin-top: 10px;
     display: block;
 }
+.dropdown {
+    float: left;
+}
+.dropdown h3 {
+    font-size: 0.9em;
+}
+.addRoom {
+    float: left;
+    margin: 19px 0 0 10px;
+    font-size: 0.9em;
+    color: #5BC0DE;
+}
+.addRoom:hover, .postingAs:hover {
+    cursor: pointer;
+}
+.options{
+    height: 50px;
+}
 
 
 /***********************/
 /*     POSTS FEED     */
 /*********************/
 
-.chat {
-    margin: 10px 20px;
-    border-bottom: 1px solid #C0C0C0;
-    padding: 15px 0;
-}
-.chat .username {
-    font-weight: 800;
-    display: inline-block;
-}
-.chat .created {
-    display: inline-block;
-    float: right;
+#chats {
+    border: 1px solid #979797;
+    border-radius: 5px;
+    background: white;
+    min-height: 500px;
 }
 
-.chat:hover {
-    background-color: #ddd;
+.chat {
+    border-bottom: 1px solid #C0C0C0;
+    padding: 15px 20px;
 }
+div > .chat:first-child {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+div > .chat:last-child {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.friend {
+    background: #ECF7FF;
+}
+.chat .username {
+    font-weight: 600;
+    color: #1E5473;
+    display: inline-block;
+    cursor: pointer;
+}
+.chat .footer {
+    font-size: 0.85em;
+    color: #B2B2B2;
+}
+.chat .created, .chat .room {
+    display: inline-block;
+}
+.chat .room {
+    /*display: none;*/
+    margin-left: 15px;
+}
+.chat .roomname {
+    font-weight: 500;
+}
+
+/*.chat:hover {
+    background-color: #ddd;
+}*/
 
 .spinner {
     float: right;
@@ -129,6 +183,33 @@ form input[type=text] {
 }
 .template {
     display: none;
+}
+
+
+/***********************/
+/*    FRIENDS LIST    */
+/*********************/
+
+.friends-box {
+    border-radius: 5px;
+    border: 1px solid #979797;
+    background: white;
+    padding: 20px;
+}
+.friends-box h1 {
+    margin: 0;
+    font-size: 1.2em;
+}
+.friends-box ul {
+    margin: 0;
+    list-style: none;
+    padding-left: 0;
+}
+.friends-box .instructions {
+    font-size: 0.7em;
+    font-style: italic;
+    color: grey;
+    margin-bottom: 10px;
 }
 
 

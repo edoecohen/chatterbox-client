@@ -6,13 +6,6 @@
     <link href='http://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/styles.css">
-    <!-- dependencies -->
-    <script src="bower_components/jquery/jquery.min.js"></script>
-    <script src="bower_components/underscore/underscore-min.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- your scripts -->
-    <script src="env/config.js"></script>
-    <script src="scripts/app.js"></script>
   </head>
   <body>
     <header class="navbar navbar-fixed-top" role="navigation">
@@ -22,32 +15,113 @@
         </div>
       </div>
     </header>
+    <div id="main" class="container">
 
-    <div class="container main">
+      <div class="modal fade room-modal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Add New Chat Room</h4>
+            </div>
+            <div class="modal-body">
+              <input type="text" name="title" id="roomTitle" style="width:300px; padding: 5px" placeholder='Room name...'>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="add-room btn btn-primary">Add Room</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+
+      <div class="modal fade username-modal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Change Your Username</h4>
+            </div>
+            <div class="modal-body">
+              <input type="text" name="title" id="usernewname" style="width:300px; padding: 5px" placeholder='New username...'>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="change-name btn btn-primary">Save</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+
+
+
       <div class="row">
-        <div class="col-md-6 col-md-offset-3 main-col">
+      <div class="col-md-2 friends-box">
+        <h1>Friends</h1>
+        <div class='instructions'>
+          Click on a username in the feed to add or remove him as a friend.
+        </div>
+        <ul>
+          
+        </ul>
+      </div>
+        <div class="col-md-6 col-md-offset-1 main-col">
       
-          <form class="new-post">
+          <div class="new-post-con">
+            <h1>Compose New Chat</h1>
+            <h4 class="postingAs">Posting as: <span class="posting-name">Joker123</span></h4>
+            <form id="send" class="new-post">
 
-            <textarea class="form-control" placeholder="What's new?" name="post"></textarea>
-            <button type="submit" class="btn btn-info btn-disabled">Post</button>
+              <textarea class="form-control" placeholder="What's new?" name="post"></textarea>
 
-          </form>
+              <div class="options">
+                <div class="dropdown">
+                <!-- <h3>Posting in room:</h3> -->
+                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-expanded="true">
+                    <span class="status">Lobby</span>
+                    <span class="caret"></span>
+                  </button>
+                  <ul id="roomSelect" class="dropdown-menu dropdown-inverse" role="menu" aria-labelledby="dropdownMenu1">
+                    <li role="presentation"><a role="menuitem" href="#">Lobby</a></li>
+                  </ul>
+                </div>
 
-          <div id="chats">
-          </div>   
+                <div class="addRoom">Add Room</div>
+
+                <button type="submit" class="btn btn-info btn-disabled submit">Post</button>
+              </div>
+
+            </form>
+          </div>
+
+          <div id="chats"></div>          
+        </div>
       </div>
     </div>
 
 
-    <div class="template">
+    <!-- <div class="template">
       <div class="msgContainer chat">
         <div class="username"></div>
-        <p class="message"></p>
-        <div class="created"></div>
-        <div class="roomname"></div>
+        <p class="text"></p>
+        <div class="footer">
+          <div class="created"></div>
+          <div class="room">In room: <span class="roomname"></span></div>
+        </div>
       </div>
-    </div>
+    </div> -->
+
+
+    <!-- SCRIPTS  -->
+    <!-- dependencies -->
+    <script src="bower_components/jquery/jquery.min.js"></script>
+    <script src="bower_components/underscore/underscore-min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/moment/min/moment.min.js"></script>
+    <!-- your scripts -->
+    <script src="env/config.js"></script>
+    <script src="scripts/app.js"></script>
+    
 
   </body>
 </html>
