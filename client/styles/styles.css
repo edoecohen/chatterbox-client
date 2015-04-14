@@ -52,6 +52,43 @@ body {
 
 
 /***********************/
+/*     ROOM INFO      */
+/*********************/
+
+.room-info {
+    margin-bottom: 20px;
+
+}
+.room-info h1 {
+    display: inline-block;
+    margin: 0;
+}
+.room-info .right {
+    float: right;
+    margin-top: 5px;
+}
+.room-info h1 {
+
+}
+
+.dropdown {
+    float: left;
+}
+.dropdown h3 {
+    font-size: 0.9em;
+}
+.addRoom {
+    float: left;
+    margin: 9px 0 0 10px;
+    font-size: 0.9em;
+    color: #5BC0DE;
+}
+.addRoom:hover{
+    cursor: pointer;
+}
+
+
+/***********************/
 /*   NEW POST FORM    */
 /*********************/
 
@@ -101,19 +138,8 @@ form input[type=text] {
     margin-top: 10px;
     display: block;
 }
-.dropdown {
-    float: left;
-}
-.dropdown h3 {
-    font-size: 0.9em;
-}
-.addRoom {
-    float: left;
-    margin: 19px 0 0 10px;
-    font-size: 0.9em;
-    color: #5BC0DE;
-}
-.addRoom:hover, .postingAs:hover {
+
+.postingAs:hover {
     cursor: pointer;
 }
 .options{
@@ -136,16 +162,9 @@ form input[type=text] {
     border-bottom: 1px solid #C0C0C0;
     padding: 15px 20px;
 }
-div > .chat:first-child {
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-}
-div > .chat:last-child {
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-}
+
 .friend {
-    background: #ECF7FF;
+    font-weight: bold;
 }
 .chat .username {
     font-weight: 600;
@@ -168,10 +187,6 @@ div > .chat:last-child {
     font-weight: 500;
 }
 
-/*.chat:hover {
-    background-color: #ddd;
-}*/
-
 .spinner {
     float: right;
     height: 46px;
@@ -184,6 +199,11 @@ div > .chat:last-child {
 .template {
     display: none;
 }
+.roomname:hover {
+    cursor: pointer;
+    color: #5BC0DE;
+}
+
 
 
 /***********************/
@@ -210,6 +230,7 @@ div > .chat:last-child {
     font-style: italic;
     color: grey;
     margin-bottom: 10px;
+    margin-top: 3px;
 }
 
 

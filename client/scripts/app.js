@@ -25,20 +25,18 @@ app.send = function(msgObj){
 
 app.addMessage = function(message){
     var timeCreated = moment(this.createdAt).calendar();
+    var room = "";
     if(this.roomname) {
-      var room = "Room: " + this.roomname;
+      room = "Room: <span class='roomname'>" + this.roomname + "</span>";
     }
     $('#chats').append('<div class="chat"><div class="username">' + this.username + '</div><p class="text">' + this.text + '</p><div class="footer"><div class="created">' + timeCreated + '</div><div class="room">' + room + '</div></div></div>');
 };
-
 app.fetch = function() {
-
-  // var allPosts = [];
 
   $.ajax({
     url: this.server,
     type: 'GET',
-    data: { order: '-updatedAt', limit : 50 },
+    data: {order: '-updatedAt'},
     contentType: 'application/json',
     
     success: function (data) {
@@ -48,27 +46,55 @@ app.fetch = function() {
           item.username = item.username.replace('<', '&lt;');
           item.username = item.username.replace('>', '&gt;');
         }
-
         if(this.roomname){
           if(app.rooms.indexOf(this.roomname) === -1){
             app.addRoom(this.roomname);
           }
         }
-
         if(item.text){
           item.text = item.text.replace('<', '&lt;');
           item.text = item.text.replace('>', '&gt;');
           app.addMessage.call(this, item);
         }
       });
+      app.clickFriend();
+      app.clickRoom();
+    },
+    error: function (data) {
+      // see: https://developer.mozilla.org/en-US/docs/Web/API/console.error
+      console.error('chatterbox: Failed to get messages');
+    }
+  });
+};
 
-      app.changeRoom();
-      
-      $('.username').on('click', function(){
-        var newFriend = $(this).text();
-        app.addFriend(newFriend);
+app.fetchRoom = function(room) {
+
+  $.ajax({
+    url: this.server,
+    type: 'GET',
+    data: 'where={"roomname":"' + room + '"}', order: '-updatedAt',
+    contentType: 'application/json',
+    
+    success: function (data) {
+
+      $.each(data.results, function(i, item) {
+        if(item.username){
+          item.username = item.username.replace('<', '&lt;');
+          item.username = item.username.replace('>', '&gt;');
+        }
+        if(this.roomname){
+          if(app.rooms.indexOf(this.roomname) === -1){
+            app.addRoom(this.roomname);
+          }
+        }
+        if(item.text){
+          item.text = item.text.replace('<', '&lt;');
+          item.text = item.text.replace('>', '&gt;');
+          app.addMessage.call(this, item);
+        }
       });
-
+      app.clickFriend();
+      app.clickRoom();
     },
     error: function (data) {
       // see: https://developer.mozilla.org/en-US/docs/Web/API/console.error
@@ -78,9 +104,16 @@ app.fetch = function() {
 };
 
 app.changeRoom = function(){
-  $('.dropdown-inverse li > a').on('click', function(e){
-    $('.status').text(this.innerHTML);
-    app.room = $('.status').text();
+  $('.dropdown-inverse').on('click', 'a', function(){
+    app.room = $(this).text();
+    $('.room-info h1').text(app.room);
+    app.clearMessages();
+    if(app.room === 'All Chats'){
+      app.fetch();
+    }
+    else {
+      app.fetchRoom(app.room);
+    }
   });
 };
 
@@ -105,8 +138,8 @@ app.handleSubmit = function(){
   });
 };
 
-app.room = "Lobby";
-app.rooms = [];
+app.room = "All Chats";
+app.rooms = ['All Chats'];
 app.addRoom = function(room) {
   $('#roomSelect').append('<li role="presentation"><a role="menuitem" tabindex="-1" href="#">' + room + '</a></li>');
   app.rooms.push(room);
@@ -157,31 +190,50 @@ app.addFriend = function(newFriend){
   if(app.friends.indexOf(newFriend) === -1 ){
     $('.friends-box ul').append('<li>' + newFriend + '</li>');
     app.friends.push(newFriend);
-    $(".username:contains(" + newFriend + ")").parent().addClass('friend');
+    $(".username:contains(" + newFriend + ")").parent().find('.text').addClass('friend');
   }
   else if(app.friends.indexOf(newFriend) > -1 ){
     $('.friends-box li:contains(' + newFriend + ')').remove();
     app.friends.splice( $.inArray(newFriend, app.friends), 1 );
-    $(".username:contains(" + newFriend + ")").parent().removeClass('friend');
+    $(".username:contains(" + newFriend + ")").parent().find('.text').removeClass('friend');
   }
 };
+
+app.clickFriend = function(){
+  $('.username').on('click', function(){
+    var newFriend = $(this).text();
+    app.addFriend(newFriend);
+  });
+}
+
+app.clickRoom = function(){
+  $('.roomname').on('click', function(){
+    app.room = $(this).text();
+    $('.room-info h1').text(app.room);
+    app.clearMessages();
+    if(app.room === 'All Chats'){
+      app.fetch();
+    }
+    else {
+      app.fetchRoom(app.room);
+    }
+  })
+}
 
 app.init = function() {
   $('.posting-name').text(app.username);
   app.fetch();
   app.handleSubmit();
   app.createRoom();
+  app.changeRoom();
   app.changeName();
-  $('.username').on('click', function(){
-    var newFriend = $(this).text();
-    console.log(newFriend);
-    app.addFriend(newFriend);
-  });
-  // app.addFriend();
-
+  
+  
+  
   // WHEN YOU CLICK ON THE LOGO
   $('.navbar-brand').on('click', function(){
     app.clearMessages();
+    $('.room-info h1').text(this.innerHTML);
     app.fetch();
   });
 

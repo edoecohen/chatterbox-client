@@ -67,6 +67,22 @@
       </div>
         <div class="col-md-6 col-md-offset-1 main-col">
       
+          <div class="room-info">
+            <h1>All Chats</h1>
+            <div class="right">
+              <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-expanded="true">
+                  <span class="status">Change Room</span>
+                  <span class="caret"></span>
+                </button>
+                <ul id="roomSelect" class="dropdown-menu dropdown-inverse" role="menu" aria-labelledby="dropdownMenu1">
+                  <li role="presentation"><a role="menuitem" href="#">All Chats</a></li>
+                </ul>
+              </div>
+              <div class="addRoom">Add Room</div>
+            </div>
+          </div>
+
           <div class="new-post-con">
             <h1>Compose New Chat</h1>
             <h4 class="postingAs">Posting as: <span class="posting-name">Joker123</span></h4>
@@ -75,18 +91,7 @@
               <textarea class="form-control" placeholder="What's new?" name="post"></textarea>
 
               <div class="options">
-                <div class="dropdown">
-                <!-- <h3>Posting in room:</h3> -->
-                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-expanded="true">
-                    <span class="status">Lobby</span>
-                    <span class="caret"></span>
-                  </button>
-                  <ul id="roomSelect" class="dropdown-menu dropdown-inverse" role="menu" aria-labelledby="dropdownMenu1">
-                    <li role="presentation"><a role="menuitem" href="#">Lobby</a></li>
-                  </ul>
-                </div>
 
-                <div class="addRoom">Add Room</div>
 
                 <button type="submit" class="btn btn-info btn-disabled submit">Post</button>
               </div>
